@@ -10,6 +10,8 @@ while true
 do
   API_DATA="`curl -X GET "https://api.spotify.com/v1/me/player/currently-playing" -H "Authorization: Bearer $APIKEY" --silent`" 
   echo $API_DATA | grep -E "The access token expired" > /dev/null && echo "Api key expired, generate a new one." && exit 1  
+  echo $API_DATA | grep -E "Invalid access token" > /dev/null && echo "Invalid Api key (try generating a new one)." && exit 1  
+  echo "$API_DATA" | sed -n "2p" | grep -E "error" > /dev/null && echo "Unknown error (try generating a new api key)." && exit 1 
   if [ "$API_DATA" = "" ];
   then
     echo "No song playing." > current_song
