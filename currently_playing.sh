@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 if [ -f "api_key" ];
 then
   APIKEY="`cat api_key`"
